@@ -3,7 +3,7 @@
 Install dependencies:
 
 ```bash
-go run `ls *.go`
+glide up
 ```
 
 Start it up w/:
