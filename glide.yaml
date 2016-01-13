@@ -1,0 +1,5 @@
+package: github.com/rxylabs/proxy
+import:
+- package: flag
+- package: github.com/valyala/fasthttp
+- package: log
