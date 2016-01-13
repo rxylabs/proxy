@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 )
 
@@ -21,14 +20,13 @@ func init() {
 	flag.StringVar(&config.port, "port", "5000", "Port to use")
 	flag.Parse()
 
-	if config.googleToken == "" {
-		log.Panic("googleToken is required")
-	}
-
 	if config.target == "" {
 		log.Panic("target is required")
 	}
 
+	if config.port == "" {
+		log.Panic("port is required")
+	}
 }
 
 func main() {
@@ -37,7 +35,7 @@ func main() {
 		log.Panic("Error parsing target: ", config.target, ": ", err)
 	}
 
-	rp := httputil.NewSingleHostReverseProxy(targetURL)
+	jason := NewTransporter(targetURL)
 
-	http.ListenAndServe(fmt.Sprintf(":%s", config.port), rp)
+	http.ListenAndServe(fmt.Sprintf(":%s", config.port), jason)
 }
